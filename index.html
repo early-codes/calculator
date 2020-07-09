@@ -1,0 +1,466 @@
+<!--
+    TO DO
+    
+    round decimals ok
+    fill buttons
+    avoid select ok
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>myCalculator</title>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+    
+    <div id="container">
+        <div id="submit">
+            <input type="text" id="textSubmit" value="0">
+        </div>
+        <div id="topFuncs">
+            <div class="func" id="MC"> <!--ok-->
+                <p>MC</p>
+            </div>
+            <div class="func" id="MR"> <!--ok-->
+                <p>MR</p>
+            </div>
+            <div class="func" id="M+"> <!--ok-->
+                <p>M+</p>
+            </div>
+            <div class="func" id="M-"> <!--ok-->
+                <p>M-</p>
+            </div>
+            <div class="func" id="CE"> <!--ok-->
+                <p>CE</p>
+            </div>
+        </div>
+        <div id="digits">
+            <div class="digit" id="7">
+                <p>7</p>
+            </div>
+            <div class="digit" id="8">
+                <p>8</p>
+            </div>
+            <div class="digit" id="9">
+                <p>9</p>
+            </div>
+            <div class="digit" id="4">
+                <p>4</p>
+            </div>
+            <div class="digit" id="5">
+                <p>5</p>
+            </div>
+            <div class="digit" id="6">
+                <p>6</p>
+            </div>
+            <div class="digit" id="1">
+                <p>1</p>
+            </div>
+            <div class="digit" id="2">
+                <p>2</p>
+            </div>
+            <div class="digit" id="3">
+                <p>3</p>
+            </div>
+            <div class="digit" id="0">
+                <p>0</p>
+            </div>
+            <div class="digit" id=".">
+                <p>.</p>
+            </div>
+            <div class="digit" id="+/-">
+                <p>+/-</p>
+            </div>
+        </div>
+        <div id="rightFuncs">
+            <div class="func" id="divide"> <!--ok-->
+                <p>/</p>
+            </div>
+            <div class="func" id="multiply"> <!--ok-->
+                <p>X</p>
+            </div>
+            <div class="func" id="substract"> <!--ok-->
+                <p>-</p>
+            </div>
+            <div class="func" id="add"> <!--ok-->
+                <p>+</p>
+            </div>
+            <div class="func" id="sqroot"> <!--ok-->
+                <p>√</p>
+            </div>
+            <div class="func" id="percent"> <!--ok-->
+                <p>%</p>
+            </div>
+            <div class="func" id="1/"> <!--ok-->
+                <p>1/</p>
+            </div>
+            <div class="func" id="equals"> <!--ok-->
+                <p>=</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<style>
+    #container {
+        position: fixed;
+        height: 550px;
+        width: 470px;
+        top: 20%;
+        left: 30%;
+        background-color: darkmagenta;
+        border-radius: 20px;
+    }
+    #submit {
+        position: relative;
+        margin: 10px auto;
+        height: 30px;
+        width: 300px;
+        border-style: solid;
+        border: 3px;
+        border-color: black; 
+
+        
+    }
+    #textSubmit {
+        height: 30px;
+        width: 300px;
+        border-radius: 10px;
+        font-size: 20px;
+        direction: rtl;
+    }
+    #topFuncs {
+        display: block;
+        height: 90px;
+        width: 450px;
+        margin: 10px;
+        float: left;
+        text-align: center;
+    }
+    #topFuncs .func {
+        padding: 5px;
+        float: left;
+        height: 60px;
+        width: 60px;
+        display: block;
+        margin: 10px;
+        background-color: darkgoldenrod;
+    }
+    .func:hover {
+        cursor: grab;
+    }
+    #digits {
+        display: block;
+        height: 400px;
+        width: 270px;
+        margin: 0px 0px 0px 10px;
+        float: left;
+        text-align: center; 
+    }
+    .digit:hover {
+        cursor: grab;
+    }
+    #digits .digit {
+        padding: 5px;
+        float: left;
+        height: 60px;
+        width: 60px;
+        display: block;
+        margin: 10px;
+        background-color: darkgoldenrod;        
+    }
+    #rightFuncs {
+        display: block;
+        height: 400px;
+        width: 180px;
+        margin: 0px 0px 0px 1px;
+        float: left; 
+        text-align: center;
+    }
+    #rightFuncs .func {
+        padding: 5px;
+        float: left;
+        height: 60px;
+        width: 60px;
+        display: block;
+        margin: 10px;
+        background-color: darkgoldenrod; 
+    }
+    body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+</style>
+
+<script>
+    first = 0;
+    second = 0;
+    result = 0;
+    oper = "";
+    operSelected = 0;
+    memory = Number(0);
+    const seven = document.getElementById("7")
+      seven.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "7";
+            }
+            else {
+                document.getElementById('textSubmit').value = "7";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "7"
+            operSelected = 0;
+        }
+      });
+      const eight = document.getElementById("8")
+      eight.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "8";
+            }
+            else {
+                document.getElementById('textSubmit').value = "8";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "8"
+            operSelected = 0;
+        }
+      });
+      const nine = document.getElementById("9")
+      nine.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "9";
+            }
+            else {
+                document.getElementById('textSubmit').value = "9";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "9"
+            operSelected = 0;
+        }
+      });
+      const four = document.getElementById("4")
+      four.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "4";
+            }
+            else {
+                document.getElementById('textSubmit').value = "4";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "4"
+            operSelected = 0;
+        }
+      });
+      const five = document.getElementById("5")
+      five.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "5";
+            }
+            else {
+                document.getElementById('textSubmit').value = "5";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "5"
+            operSelected = 0;
+        }
+      });
+      const six = document.getElementById("6")
+      six.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "6";
+            }
+            else {
+                document.getElementById('textSubmit').value = "6";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "6"
+            operSelected = 0;
+        }
+      });
+      const tree = document.getElementById("3")
+      tree.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "3";
+            }
+            else {
+                document.getElementById('textSubmit').value = "3";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "3"
+            operSelected = 0;
+        }
+      });
+      const two = document.getElementById("2")
+      two.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "2";
+            }
+            else {
+                document.getElementById('textSubmit').value = "2";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "2"
+            operSelected = 0;
+        }
+      });
+      const one = document.getElementById("1")
+      one.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "1";
+            }
+            else {
+                document.getElementById('textSubmit').value = "1";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "1"
+            operSelected = 0;
+        }
+      });
+      const zero = document.getElementById("0")
+      zero.addEventListener('click', (e) => {
+        if (operSelected == 0) {
+            if (document.getElementById('textSubmit').value != "0") {
+                document.getElementById('textSubmit').value += "0";
+            }
+        }
+        else {
+            document.getElementById('textSubmit').value = "0"
+            operSelected = 0;
+        }
+      });
+      const dot = document.getElementById(".")
+      let decFlag = 0;
+      dot.addEventListener('click', (e) => {
+        if (decFlag == 0) {
+            document.getElementById('textSubmit').value = document.getElementById('textSubmit').value + ".";
+            decFlag = 1;
+        }
+      });
+      const ce = document.getElementById("CE")
+      ce.addEventListener('click', (e) => {
+        decFlag = 0;
+        document.getElementById('textSubmit').value = "0";
+      });
+      const sqroot = document.getElementById("sqroot")
+      sqroot.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        document.getElementById('textSubmit').value = Math.round(Math.sqrt(first) * 100) / 100;
+        operSelected = 1;
+      });
+      const add = document.getElementById("add")
+      add.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        oper = "add";
+        operSelected = 1;
+      });
+      const divide = document.getElementById("divide")
+      divide.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        oper = "divide";
+        operSelected = 1;
+      });
+      const multiply = document.getElementById("multiply")
+      multiply.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        oper = "multiply";
+        operSelected = 1;
+      });
+      const substract = document.getElementById("substract")
+      substract.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        oper = "substract";
+        operSelected = 1;
+      });
+      const equals = document.getElementById("equals")
+      equals.addEventListener('click', (e) => {
+        decFlag = 0;
+        second = document.getElementById('textSubmit').value;
+        switch (oper) {
+            case "add":
+                result = Math.round((Number(first) + Number(second)) * 1000000) / 1000000 ;
+                break;
+            case "multiply":
+                result = Math.round((first * second) * 1000000) / 1000000;
+                break;
+            case "divide":
+                result = Math.round((first / second) * 1000000) / 1000000;
+                break;
+            case "substract":
+                result = Math.round((first - second) * 1000000) / 1000000;
+                break;
+        }
+        document.getElementById('textSubmit').value = result;
+        operSelected = 1;
+      });
+      const mc = document.getElementById("MC")
+      ce.addEventListener('click', (e) => {
+        memory = 0;
+      });
+      const mplus = document.getElementById("M+")
+      mplus.addEventListener('click', (e) => {
+        memory += Number(document.getElementById('textSubmit').value);
+        operSelected = 1;
+      });
+      const msubt = document.getElementById("M-")
+      msubt.addEventListener('click', (e) => {
+        memory -= document.getElementById('textSubmit').value;
+        operSelected = 1;
+      });
+      const mres = document.getElementById("MR")
+      mres.addEventListener('click', (e) => {
+        document.getElementById('textSubmit').value = Math.round(memory * 1000000) / 1000000;
+        operSelected = 1;
+      });
+      const percent = document.getElementById("percent")
+      percent.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        document.getElementById('textSubmit').value = Math.round(first * 1000000) / 100000000 ;
+        operSelected = 1;
+      });
+      const oneDiv = document.getElementById("1/")
+      oneDiv.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        document.getElementById('textSubmit').value = Math.round((1/document.getElementById('textSubmit').value) * 1000000) / 1000000 ;
+        operSelected = 1;
+      });
+      const minus = document.getElementById("+/-")
+      minus.addEventListener('click', (e) => {
+        decFlag = 0;
+        first = document.getElementById('textSubmit').value;
+        document.getElementById('textSubmit').value = Math.round((document.getElementById('textSubmit').value) * 1000000) / 1000000 * -1 ;
+      });
+
+</script>
